@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (100% documented)</p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" alt=""/>
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/TaxCalculator.html">TaxCalculator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/TaxErrors.html">TaxErrors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/MultiCurrencyAmount.html">MultiCurrencyAmount</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/TaxSlip.html">TaxSlip</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TaxSlipRow.html">TaxSlipRow</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TaxSlipRowValue.html">TaxSlipRowValue</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='swiftbeancounttax' class='heading'>SwiftBeanCountTax</h1>
+
+<p><a href="https://github.com/Nef10/SwiftBeanCountTax/actions?query=workflow%3A%22CI%22"><img src="https://github.com/Nef10/SwiftBeanCountTax/workflows/CI/badge.svg?event=push" alt="CI Status"></a> <a href="https://nef10.github.io/SwiftBeanCountTax/"><img src="https://nef10.github.io/SwiftBeanCountTax/badge.svg" alt="Documentation percentage"></a> <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Nef10/SwiftBeanCountTax" alt="License: MIT"></a> <a href="https://github.com/Nef10/SwiftBeanCountTax/releases"><img src="https://img.shields.io/github/v/release/Nef10/SwiftBeanCountTax?label=SemVer&sort=semver" alt="Latest version"></a> <img src="https://img.shields.io/badge/platform-linux%20%7C%20macOS%20%7C%20iOS%20%7C%20watchOS%20%7C%20tvOS-blue" alt="platforms supported: linux | macOS | iOS | watchOS | tvOS"> <img src="https://img.shields.io/badge/SPM-compatible-blue" alt="SPM compatible"></p>
+<h3 id='strong-em-this-project-is-part-for-swiftbeancount-please-check-out-the-main-documentation-a-href-https-github-com-nef10-swiftbeancount-here-a-em-strong' class='heading'><strong><em>This project is part for SwiftBeanCount, please check out the main documentation <a href="https://github.com/Nef10/SwiftBeanCount">here</a>.</em></strong></h3>
+<h2 id='what' class='heading'>What</h2>
+
+<p>This is a library to help you during tax season. Right now it can generate expected tax slips based on your beancount file. This allows you to easily verify your received tax slips to check for errors on either the providers side or your tracking.</p>
+<h2 id='beancount-meta-data' class='heading'>Beancount meta data</h2>
+
+<p>The library relies on meta data and custom directives in your Beancount file for configuration.</p>
+<h3 id='basic-configuration' class='heading'>Basic Configuration</h3>
+
+<ul>
+<li>You first must configure the names of the slips you want to generate, and set a currency for each one</li>
+<li>Afterwards, add meta data to the account in the form of tax slip name: Box name + number</li>
+<li>Optionally, you can add a tax slip issuer, e.g. if you receive the same slip from multiple institutions - if no issuer is set, all amounts for the same slip and box will be added together</li>
+</ul>
+
+<p>Example:</p>
+<pre class="highlight plaintext"><code>2020-01-01 custom "tax-slip-settings" "slip-names" "t3" "t5"
+2020-01-01 custom "tax-slip-settings" "slip-currency" "t3" "CAD"
+2020-01-01 custom "tax-slip-settings" "slip-currency" "t5" "CAD"
+
+2020-01-01 open Income:Interest:Taxable:BankABC CAD
+  t5: "Interest from Canadian sources (Box 13)"
+  tax-slip-issuer: "BankABC"
+</code></pre>
+<h3 id='split-slips-by-symbol' class='heading'>Split Slips by Symbol</h3>
+
+<p>Some tax slips are split up by individual stock / ETF. To configure this, either the last or second last part of the account name must match a configured commodity or you add <code>tax-symbol</code> meta-data to the account.</p>
+
+<p>Aditionally to the symbol, you can add a description. For a commodity add <code>name</code> or on an account the <code>tax-description</code> meta data.</p>
+
+<p>Example:</p>
+<pre class="highlight plaintext"><code>2020-01-01 commodity ETFABC
+  name: "ETF ABC @ Exchange"
+
+2020-01-01 open Income:Dividend:Taxable:ETFABC:ForeignNonBusinessIncome CAD
+  t3: "Foreign Non-Business Income (Box 25)"
+
+2020-01-01 open Income:Dividend:Taxable:Portfolio:Other CAD
+  t3: "Other Income (Box 26)"
+  tax-symbol: "StockTicker"
+  tax-description: "Stock @ Exchange"
+</code></pre>
+
+<p>If your account has the name matching to a commodity, but you don&rsquo;t want to treat it as one, add <code>tax-symbol: &quot;&quot;</code> to it.</p>
+<h3 id='split-accounts' class='heading'>Split accounts</h3>
+
+<p>Sometimes, if you split up your slip by stock, you don&rsquo;t want to create a separate account for everything. E.g. you track the dividends via different income accounts, but don&rsquo;t want to create separate expense accounts per stock for tax paid. To do this:</p>
+
+<ol>
+<li>Configure the tax slip and box via a customs directive instead of account meta data, as shown below</li>
+<li>Make sure the transaction with the posting to this account has another posting from an account configured via meta data for the same tax slip</li>
+<li>Make sure the other account has a symbol configured</li>
+</ol>
+
+<p>Example:</p>
+<pre class="highlight plaintext"><code>2020-01-01 custom "tax-slip-settings" "account" "t3" "Foreign Non-Business Income Tax paid (Box 34)" "Expenses:Tax:ForeignNonBusiness"
+
+2020-01-01 * "" ""
+  Income:Dividend:Taxable:ETFABC:ForeignNonBusinessIncome 10.00 CAD
+  Expenses:Tax:ForeignNonBusiness -2.50 CAD
+  Assets:Portfolio 7.50 CAD
+</code></pre>
+<h3 id='dates' class='heading'>Dates</h3>
+
+<p>Sometimes income is earned in one year, but only paid in another. You can change the year a transaction should count towards via the <code>tax-year</code> meta data on a transaction, e.g. <code>tax-year: &quot;2022&quot;</code>.</p>
+
+<p>If multiple custom directives for the same setting exist, the latest one up until the end of the tax year is used. E.g. when generating tax slips for 2021, the latest directive up until 2021-12-31 is used.</p>
+<h2 id='how' class='heading'>How</h2>
+
+<p>1) Load your ledger, e.g. via  <a href="https://github.com/Nef10/SwiftBeanCountParser">SwiftBeanCountParser</a>
+2) Call <code>TaxCalculator.generateTaxSlips(from ledger: Ledger, for year: Int)</code></p>
+
+<p>Please also check out the complete documentation <a href="https://nef10.github.io/SwiftBeanCountTax/">here</a>.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>The library supports the Swift Package Manger, so simply add a dependency in your <code>Package.swift</code>:</p>
+<pre class="highlight plaintext"><code>.package(url: "https://github.com/Nef10/SwiftBeanCountTax.git", .exact(from: "X.Y.Z")),
+</code></pre>
+
+<p><em>Note: as per semantic versioning all versions changes &lt; 1.0.0 can be breaking, so please use <code>.exact</code> for now</em></p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2023 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2023-04-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
