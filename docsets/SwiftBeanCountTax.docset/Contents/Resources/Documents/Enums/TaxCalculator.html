@@ -71,6 +71,9 @@
             <a class="nav-group-name-link" href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Sale.html">Sale</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Structs/TaxSlip.html">TaxSlip</a>
               </li>
               <li class="nav-group-task">
@@ -95,12 +98,12 @@
 
                 </div>
               </div>
-            <p>Utility to generate tax slips from a <code>Ledger</code></p>
+            <p>Utility to generate tax relevant data from a <code>Ledger</code></p>
 
-<p>It relies heavily on meta data in the leadger.</p>
+<p>It relies heavily on meta data in the ledger.</p>
 
               <div class="slightly-smaller">
-                <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/Sources/SwiftBeanCountTax/TaxCalculator.swift#L32-L199">Show on GitHub</a>
+                <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/Sources/SwiftBeanCountTax/TaxCalculator.swift#L34-L261">Show on GitHub</a>
               </div>
           </div>
         </section>
@@ -169,7 +172,72 @@
                         <p>Array of <code><a href="../Structs/TaxSlip.html">TaxSlip</a></code>s</p>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/Sources/SwiftBeanCountTax/TaxCalculator.swift#L39-L60">Show on GitHub</a>
+                        <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/Sources/SwiftBeanCountTax/TaxCalculator.swift#L43-L61">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:17SwiftBeanCountTax0D10CalculatorO15getTaxableSales4from3forSayAA4SaleVG0abC5Model6LedgerC_SitKFZ"></a>
+                    <a name="//apple_ref/swift/Method/getTaxableSales(from:for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:17SwiftBeanCountTax0D10CalculatorO15getTaxableSales4from3forSayAA4SaleVG0abC5Model6LedgerC_SitKFZ">getTaxableSales(from:<wbr>for:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Gets all taxable sales from the ledger for a specific year</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">getTaxableSales</span><span class="p">(</span><span class="n">from</span> <span class="nv">ledger</span><span class="p">:</span> <span class="kt">Ledger</span><span class="p">,</span> <span class="k">for</span> <span class="nv">year</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/Sale.html">Sale</a></span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ledger</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ledger to get the transactions from</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>year</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>tax year</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Array of all sales</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/Nef10/SwiftBeanCountTax/blob/main/Sources/SwiftBeanCountTax/TaxCalculator.swift#L68-L108">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -182,8 +250,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://github.com/Nef10" target="_blank" rel="external noopener">Nef10</a>. All rights reserved. (Last updated: 2023-04-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+      <p>&copy; 2024 <a class="link" href="https://github.com/Nef10" target="_blank" rel="external noopener">Nef10</a>. All rights reserved. (Last updated: 2024-03-19)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
 </html>

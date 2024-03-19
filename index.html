@@ -70,6 +70,9 @@
             <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Sale.html">Sale</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/TaxSlip.html">TaxSlip</a>
               </li>
               <li class="nav-group-task">
@@ -93,11 +96,15 @@
 <h3 id='strong-em-this-project-is-part-for-swiftbeancount-please-check-out-the-main-documentation-a-href-https-github-com-nef10-swiftbeancount-here-a-em-strong' class='heading'><strong><em>This project is part for SwiftBeanCount, please check out the main documentation <a href="https://github.com/Nef10/SwiftBeanCount">here</a>.</em></strong></h3>
 <h2 id='what' class='heading'>What</h2>
 
-<p>This is a library to help you during tax season. Right now it can generate expected tax slips based on your beancount file. This allows you to easily verify your received tax slips to check for errors on either the providers side or your tracking.</p>
+<p>This is a library to help you during tax season. Right now it can list taxable sales and generate expected tax slips based on your beancount file. This allows you to easily verify your received tax slips to check for errors on either the providers side or your tracking.</p>
 <h2 id='beancount-meta-data' class='heading'>Beancount meta data</h2>
 
 <p>The library relies on meta data and custom directives in your Beancount file for configuration.</p>
-<h3 id='basic-configuration' class='heading'>Basic Configuration</h3>
+<h3 id='taxable-sales' class='heading'>Taxable Sales</h3>
+
+<p>On the account you are selling from, add the <code>&quot;tax-sale&quot;</code> meta data, specifing the name the sales should show be grouped by, usually the brokers name.</p>
+<h3 id='tax-slips' class='heading'>Tax Slips</h3>
+<h4 id='basic-configuration' class='heading'>Basic Configuration</h4>
 
 <ul>
 <li>You first must configure the names of the slips you want to generate, and set a currency for each one</li>
@@ -114,7 +121,7 @@
   t5: "Interest from Canadian sources (Box 13)"
   tax-slip-issuer: "BankABC"
 </code></pre>
-<h3 id='split-slips-by-symbol' class='heading'>Split Slips by Symbol</h3>
+<h4 id='split-slips-by-symbol' class='heading'>Split Slips by Symbol</h4>
 
 <p>Some tax slips are split up by individual stock / ETF. To configure this, either the last or second last part of the account name must match a configured commodity or you add <code>tax-symbol</code> meta-data to the account.</p>
 
@@ -134,7 +141,7 @@
 </code></pre>
 
 <p>If your account has the name matching to a commodity, but you don&rsquo;t want to treat it as one, add <code>tax-symbol: &quot;&quot;</code> to it.</p>
-<h3 id='split-accounts' class='heading'>Split accounts</h3>
+<h4 id='split-accounts' class='heading'>Split accounts</h4>
 
 <p>Sometimes, if you split up your slip by stock, you don&rsquo;t want to create a separate account for everything. E.g. you track the dividends via different income accounts, but don&rsquo;t want to create separate expense accounts per stock for tax paid. To do this:</p>
 
@@ -152,15 +159,17 @@
   Expenses:Tax:ForeignNonBusiness -2.50 CAD
   Assets:Portfolio 7.50 CAD
 </code></pre>
-<h3 id='dates' class='heading'>Dates</h3>
-
-<p>Sometimes income is earned in one year, but only paid in another. You can change the year a transaction should count towards via the <code>tax-year</code> meta data on a transaction, e.g. <code>tax-year: &quot;2022&quot;</code>.</p>
 
 <p>If multiple custom directives for the same setting exist, the latest one up until the end of the tax year is used. E.g. when generating tax slips for 2021, the latest directive up until 2021-12-31 is used.</p>
+<h3 id='dates' class='heading'>Dates</h3>
+
+<p>Sometimes income is earned in one year, but only paid in another; or a sale is performed in one year but only settled in the next. You can change the year a transaction should count towards via the <code>tax-year</code> meta data on a transaction, e.g. <code>tax-year: &quot;2022&quot;</code>.</p>
 <h2 id='how' class='heading'>How</h2>
 
 <p>1) Load your ledger, e.g. via  <a href="https://github.com/Nef10/SwiftBeanCountParser">SwiftBeanCountParser</a>
-2) Call <code>TaxCalculator.generateTaxSlips(from ledger: Ledger, for year: Int)</code></p>
+2) Call one of the public functions on <code><a href="Enums/TaxCalculator.html">TaxCalculator</a></code>, for example:
+    1) <code>TaxCalculator.generateTaxSlips(from ledger: Ledger, for year: Int)</code>
+    2) <code>TaxCalculator.getTaxableSales(from ledger: Ledger, for year: Int)</code></p>
 
 <p>Please also check out the complete documentation <a href="https://nef10.github.io/SwiftBeanCountTax/">here</a>.</p>
 <h2 id='usage' class='heading'>Usage</h2>
@@ -178,8 +187,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2023 <a class="link" href="https://github.com/Nef10" target="_blank" rel="external noopener">Nef10</a>. All rights reserved. (Last updated: 2023-04-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+      <p>&copy; 2024 <a class="link" href="https://github.com/Nef10" target="_blank" rel="external noopener">Nef10</a>. All rights reserved. (Last updated: 2024-03-19)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>
 </html>
