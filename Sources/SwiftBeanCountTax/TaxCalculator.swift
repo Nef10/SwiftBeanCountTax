@@ -50,13 +50,13 @@ public enum TaxCalculator {
             throw TaxErrors.noTaxSlipConfigured(year)
         }
         let taxYearTransactions = getTaxYearTransactions(ledger, year: year)
-        return try slips.flatMap { slipName throws in
-            let slip = slipName.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
+        return try slips.flatMap { name throws in
+            let slip = name.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
             guard let commodity = taxSlipCurrencySettings.filter({ $0.values[1] == slip }).min(by: { $0.date > $1.date })?.values[2] else {
                 throw TaxErrors.noCurrencyDefined(slip, year)
             }
             let splitAccounts = taxSlipAccountSettings.filter { $0.values[1] == slip }.map { ($0.values[3], $0.values[2]) }
-            return try getTaxSlips(slip, name: slipName, year: year, commodity: commodity, splitAccounts: splitAccounts, taxYearTransactions: taxYearTransactions, ledger: ledger)
+            return try getTaxSlips(slip, name: name, year: year, commodity: commodity, splitAccounts: splitAccounts, taxYearTransactions: taxYearTransactions, ledger: ledger)
         }
         .sorted { "\($0.name)\($0.issuer ?? "")" < "\($1.name)\($1.issuer ?? "")" }
     }
