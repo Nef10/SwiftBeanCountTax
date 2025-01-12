@@ -20,11 +20,13 @@ func extractInt(from string: String) -> Int? {
 func boxNumberSort(_ box1: String, _ box2: String) -> Bool {
     let number1 = extractInt(from: box1)
     let number2 = extractInt(from: box2)
-    if let number1, let number2  {
+    if let number1, let number2 {
         return number1 < number2
-    } else if number1 != nil {
+    }
+    if number1 != nil {
         return true
-    } else if number2 != nil {
+    }
+    if number2 != nil {
         return false
     }
     return box1.lowercased() < box2.lowercased()
