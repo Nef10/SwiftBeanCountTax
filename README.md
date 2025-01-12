@@ -87,7 +87,7 @@ Tax Slips only support letters and numbers. The only exceptions are round bracke
 2020-01-01 custom "tax-slip-settings" "slip-names" "t4a(p)"
 ```
 
-At all other places used, remove the brackes, e.g. use `t4ap`:
+At all other places used, remove the brackets, e.g. use `t4ap`:
 
 ```
 2020-01-01 open Income:CPP CAD
